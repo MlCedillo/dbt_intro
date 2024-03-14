@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: fct_order
+    description: Table containing data about order transactions
+        docs:
+        show: true
+      node_color: '#ff8e1c'
+    columns:
+      - name: customer_id
+        description: this is the natural key for our customer
+        tests:
+          - not_null
+          - relationships:
+              to: ref('jaffleshop_customers')
+              field: customer_id

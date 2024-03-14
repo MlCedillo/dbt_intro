@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: dim_customers
+    description: Table containing data about our customers
+    docs: 
+      show: true
+      node_color: '#ff8e1c'
+    columns:
+      - name: customer_sk
+        description: This is a unique identifier for a historical record of the customer
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: this is the natural key for our customer
+        tests:
+        - not_null
+      
+      
