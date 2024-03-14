@@ -1,19 +1,17 @@
-version: 2
-models:
-  - name: dim_customers
-    description: Table containing data about our customers
-    docs: 
-      show: true
-      node_color: '#ff8e1c'
-    columns:
-      - name: customer_sk
-        description: This is a unique identifier for a historical record of the customer
-        tests:
-          - unique
-          - not_null
-      - name: customer_id
-        description: this is the natural key for our customer
-        tests:
-        - not_null
-      
+--- dim_customer (snp)
+---
+---
+
+select
+    id::integer as customer_id,
+    dbt_scd_id as customer_sk,
+    first_name,
+    last_name,
+    first_name || ' ' || last_name as full_name,
+    postal_code::integer as postal_code,
+    dbt_updated_at::datetime as dbt_updated_at,
+    dbt_valid_from::datetime as dbt_valid_from,
+    coalesce(dbt_valid_to::datetime, '9999-12-31') as dbt_valid_to
+from
+    {{ ref('snp_customers') }}
       
